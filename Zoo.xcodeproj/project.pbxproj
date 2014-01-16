@@ -33,6 +33,8 @@
 		1647D8B9188801680083B45C /* tiger.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1647D8AC188801680083B45C /* tiger.jpeg */; };
 		1647D8BA188801680083B45C /* wolf.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1647D8AD188801680083B45C /* wolf.jpg */; };
 		1647D8BB188801680083B45C /* zebra.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1647D8AE188801680083B45C /* zebra.jpg */; };
+		1647D8BE188803B10083B45C /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8BD188803B10083B45C /* DataStore.m */; };
+		1647D8C11888075B0083B45C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8C01888075B0083B45C /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,10 @@
 		1647D8AC188801680083B45C /* tiger.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tiger.jpeg; sourceTree = "<group>"; };
 		1647D8AD188801680083B45C /* wolf.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wolf.jpg; sourceTree = "<group>"; };
 		1647D8AE188801680083B45C /* zebra.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zebra.jpg; sourceTree = "<group>"; };
+		1647D8BC188803B10083B45C /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
+		1647D8BD188803B10083B45C /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		1647D8BF1888075B0083B45C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		1647D8C01888075B0083B45C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,10 @@
 				1647D87F188800340083B45C /* AppDelegate.m */,
 				1647D89E188800550083B45C /* Animal.h */,
 				1647D89F188800550083B45C /* Animal.m */,
+				1647D8BC188803B10083B45C /* DataStore.h */,
+				1647D8BD188803B10083B45C /* DataStore.m */,
+				1647D8BF1888075B0083B45C /* MainViewController.h */,
+				1647D8C01888075B0083B45C /* MainViewController.m */,
 				1647D881188800340083B45C /* Images.xcassets */,
 				1647D876188800340083B45C /* Supporting Files */,
 			);
@@ -305,7 +315,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1647D8A0188800550083B45C /* Animal.m in Sources */,
+				1647D8BE188803B10083B45C /* DataStore.m in Sources */,
 				1647D880188800340083B45C /* AppDelegate.m in Sources */,
+				1647D8C11888075B0083B45C /* MainViewController.m in Sources */,
 				1647D87C188800340083B45C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

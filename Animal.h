@@ -12,8 +12,10 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *description;
-@property (strong, nonatomic) NSArray *funFacts;
+@property (strong, nonatomic) NSString *funFacts;
 @property (strong, nonatomic) UIImage *animalImage;
 @property (strong, nonatomic) UIImageView *animalImageview;
+
+-(Animal*)initWithName:(NSString*)name description:(NSString*)description funfacts:(NSString*)funfacts image:(UIImage*)image andimageview:(UIImageView*)imageview;
 
 @end
