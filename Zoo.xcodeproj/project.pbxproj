@@ -35,6 +35,9 @@
 		1647D8BB188801680083B45C /* zebra.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1647D8AE188801680083B45C /* zebra.jpg */; };
 		1647D8BE188803B10083B45C /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8BD188803B10083B45C /* DataStore.m */; };
 		1647D8C11888075B0083B45C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8C01888075B0083B45C /* MainViewController.m */; };
+		1647D8C41888526B0083B45C /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8C31888526B0083B45C /* ModalViewController.m */; };
+		1647D8C7188855BE0083B45C /* AnimalImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8C6188855BE0083B45C /* AnimalImageView.m */; };
+		1647D8C918885B0A0083B45C /* cross.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1647D8C818885B0A0083B45C /* cross.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,11 @@
 		1647D8BD188803B10083B45C /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
 		1647D8BF1888075B0083B45C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		1647D8C01888075B0083B45C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		1647D8C21888526B0083B45C /* ModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalViewController.h; sourceTree = "<group>"; };
+		1647D8C31888526B0083B45C /* ModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalViewController.m; sourceTree = "<group>"; };
+		1647D8C5188855BE0083B45C /* AnimalImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimalImageView.h; sourceTree = "<group>"; };
+		1647D8C6188855BE0083B45C /* AnimalImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimalImageView.m; sourceTree = "<group>"; };
+		1647D8C818885B0A0083B45C /* cross.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cross.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +159,10 @@
 				1647D8BD188803B10083B45C /* DataStore.m */,
 				1647D8BF1888075B0083B45C /* MainViewController.h */,
 				1647D8C01888075B0083B45C /* MainViewController.m */,
+				1647D8C5188855BE0083B45C /* AnimalImageView.h */,
+				1647D8C6188855BE0083B45C /* AnimalImageView.m */,
+				1647D8C21888526B0083B45C /* ModalViewController.h */,
+				1647D8C31888526B0083B45C /* ModalViewController.m */,
 				1647D881188800340083B45C /* Images.xcassets */,
 				1647D876188800340083B45C /* Supporting Files */,
 			);
@@ -202,6 +214,7 @@
 				1647D8AC188801680083B45C /* tiger.jpeg */,
 				1647D8AD188801680083B45C /* wolf.jpg */,
 				1647D8AE188801680083B45C /* zebra.jpg */,
+				1647D8C818885B0A0083B45C /* cross.jpeg */,
 			);
 			path = zoo_images;
 			sourceTree = "<group>";
@@ -289,6 +302,7 @@
 				1647D87A188800340083B45C /* InfoPlist.strings in Resources */,
 				1647D8B3188801680083B45C /* elephant.jpeg in Resources */,
 				1647D8AF188801680083B45C /* camel.jpeg in Resources */,
+				1647D8C918885B0A0083B45C /* cross.jpeg in Resources */,
 				1647D8B6188801680083B45C /* kangaroo.jpg in Resources */,
 				1647D8B9188801680083B45C /* tiger.jpeg in Resources */,
 				1647D8B4188801680083B45C /* giraffe.jpg in Resources */,
@@ -316,8 +330,10 @@
 			files = (
 				1647D8A0188800550083B45C /* Animal.m in Sources */,
 				1647D8BE188803B10083B45C /* DataStore.m in Sources */,
+				1647D8C41888526B0083B45C /* ModalViewController.m in Sources */,
 				1647D880188800340083B45C /* AppDelegate.m in Sources */,
 				1647D8C11888075B0083B45C /* MainViewController.m in Sources */,
+				1647D8C7188855BE0083B45C /* AnimalImageView.m in Sources */,
 				1647D87C188800340083B45C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

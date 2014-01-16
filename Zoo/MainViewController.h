@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Animal.h"
 #import "DataStore.h"
+#import "ModalViewController.h"
+#import "AnimalImageView.h"
 
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
 
