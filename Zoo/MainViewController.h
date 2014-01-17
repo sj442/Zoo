@@ -14,6 +14,9 @@
 
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
 
+@property (strong,nonatomic) UIPanGestureRecognizer *pangesture;
+@property CGPoint originalCenter;
+
 
     
 @end

@@ -32,6 +32,7 @@
 }
 
 -(void)handlePan:(UIPanGestureRecognizer*)recognizer{
+    self.originalCenter = recognizer.view.center;
     CGPoint translation = [recognizer translationInView:self.view];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
@@ -45,6 +46,7 @@
 
 
 -(void)handleTap:(UITapGestureRecognizer*)recognizer{
+    recognizer.numberOfTapsRequired = 1;
     
     NSLog(@"handle tap called");
     
@@ -60,6 +62,13 @@
     
 }
 
+-(void)phoneShake{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.pangesture.view.center = self.originalCenter;
+        //[self.pangesture setTranslation:CGPointMake(0, 0) inView:self.view];
+    }];
+       }
+
 -(void)createAnimalObjects{
     
     DataStore *instance = [DataStore sharedDataStore];
@@ -73,15 +82,15 @@
             AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+70, 80, 80)];
             imageView.image = [UIImage imageNamed:animalImagesnames[(i+1)*j]];
             [imageView setUserInteractionEnabled:YES];
-            UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+            self.pangesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
             UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
-            recognizer.delegate = self;
+            self.pangesture.delegate = self;
             tap.delegate = self;
             doubleTap.delegate = self;
             [imageView addGestureRecognizer:tap];
             [imageView addGestureRecognizer:doubleTap];
-            [imageView addGestureRecognizer:recognizer];
+            [imageView addGestureRecognizer:self.pangesture];
             
             imageView.animalName = animalNames[(i+1)*j];
             imageView.description = animalDescriptions[(i+1)*j];
@@ -96,7 +105,35 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+ }
+
+-(BOOL)canBecomeFirstResponder{
+    return  YES;
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        NSLog(@"phone shake happened");
+        for (AnimalImageView *imageView in self.view.subviews){
+            [UIView animateWithDuration:0.25 animations:^{
+                imageView.center = self.originalCenter;
+            }];
+    }
+    }
+
+}
+
 
 @end

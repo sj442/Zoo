@@ -25,6 +25,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(280, 30, 30, 30)];
     [button setImage:[UIImage imageNamed:@"cross.jpeg"] forState:UIControlStateNormal];
     
@@ -34,6 +39,8 @@
     name.text = self.animalName;
     [self.view addSubview:name];
     [self.view addSubview:button];
+
+    
 }
 
 - (void)didReceiveMemoryWarning
