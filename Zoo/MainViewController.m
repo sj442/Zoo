@@ -8,6 +8,8 @@
 
 #import "MainViewController.h"
 
+#define RADIANS(degrees) ((degrees * M_PI) / 180.0)
+
 @interface MainViewController ()
 
 @end
@@ -38,34 +40,38 @@
     [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
 }
 
--(void)handleDoubleTap:(UITapGestureRecognizer*)recognizer{
-    recognizer.numberOfTapsRequired = 2;
-    
-}
-
 
 -(void)handleTap:(UITapGestureRecognizer*)recognizer{
     recognizer.numberOfTapsRequired = 1;
-    
     NSLog(@"handle tap called");
-    
+    if (recognizer.state == UIGestureRecognizerStateEnded){
     ModalViewController *modal = [[ModalViewController alloc]init];
     modal.animalName = ((AnimalImageView*)recognizer.view).animalName;
     NSLog(@"modal animal name trasferred %@", modal.animalName);
     modal.description = ((AnimalImageView*)recognizer.view).description;
     modal.funfacts = ((AnimalImageView*)recognizer.view).funfacts;
-    [self presentViewController:modal animated:YES completion:^{
-        NSLog(@"tap action");
-        
-    }];
-    
+    [self presentViewController:modal animated:YES completion:nil];
+    }
 }
 
--(void)phoneShake{
-    [UIView animateWithDuration:0.25 animations:^{
-        //[self.pangesture setTranslation:CGPointMake(0, 0) inView:self.view];
-    }];
-       }
+-(void)handleLongPress:(UILongPressGestureRecognizer*)recognizer{
+    NSLog(@"long press action");
+    CGAffineTransform leftWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(-15.0));
+    CGAffineTransform rightWobble = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(15.0));
+    CGAffineTransform neutral = CGAffineTransformRotate(CGAffineTransformIdentity, RADIANS(0.0));
+    
+    recognizer.view.transform = leftWobble;  // starting point
+    
+    [UIView beginAnimations:@"wobble" context:(__bridge void *)(recognizer.view)];
+    [UIView setAnimationRepeatAutoreverses:YES];
+    [UIView setAnimationRepeatCount:3];
+    [UIView setAnimationDuration:0.100];
+    [UIView setAnimationDelegate:self];
+    recognizer.view.transform = rightWobble;
+    recognizer.view.transform = neutral; //endpoint
+    [UIView commitAnimations];
+}
+
 
 -(void)createAnimalObjects{
     
@@ -80,15 +86,17 @@
             AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+70, 80, 80)];
             imageView.image = [UIImage imageNamed:animalImagesnames[(i+1)*j]];
             [imageView setUserInteractionEnabled:YES];
+            
+            self.layer = [[CALayer alloc]initWithLayer:imageView];
             self.pangesture = [[CustomPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
             
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
-            UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
+            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
             self.pangesture.delegate = self;
             tap.delegate = self;
-            doubleTap.delegate = self;
+            longPress.delegate = self;
             [imageView addGestureRecognizer:tap];
-            [imageView addGestureRecognizer:doubleTap];
+            [imageView addGestureRecognizer:longPress];
             [imageView addGestureRecognizer:self.pangesture];
             ((CustomPanGestureRecognizer*)imageView.gestureRecognizers[2]).originalCenter = imageView.center;
             
@@ -107,17 +115,13 @@
     [super didReceiveMemoryWarning];
  }
 
--(BOOL)canBecomeFirstResponder{
-    return  YES;
-}
+
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self resignFirstResponder];
     [super viewWillDisappear:animated];
 }
 
@@ -136,6 +140,7 @@
         }
     }
 }
+
 
 
 @end

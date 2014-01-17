@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "Animal.h"
 #import "DataStore.h"
 #import "ModalViewController.h"
 #import "AnimalImageView.h"
 #import "CustomPanGestureRecognizer.h"
 
+
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic) CustomPanGestureRecognizer *pangesture;
+@property (strong, nonatomic) CALayer *layer;
 
 
     
