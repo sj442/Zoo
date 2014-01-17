@@ -31,8 +31,7 @@
     [self createAnimalObjects];
 }
 
--(void)handlePan:(UIPanGestureRecognizer*)recognizer{
-    self.originalCenter = recognizer.view.center;
+-(void)handlePan:(CustomPanGestureRecognizer*)recognizer{
     CGPoint translation = [recognizer translationInView:self.view];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
@@ -64,7 +63,6 @@
 
 -(void)phoneShake{
     [UIView animateWithDuration:0.25 animations:^{
-        self.pangesture.view.center = self.originalCenter;
         //[self.pangesture setTranslation:CGPointMake(0, 0) inView:self.view];
     }];
        }
@@ -82,7 +80,8 @@
             AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+70, 80, 80)];
             imageView.image = [UIImage imageNamed:animalImagesnames[(i+1)*j]];
             [imageView setUserInteractionEnabled:YES];
-            self.pangesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+            self.pangesture = [[CustomPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+            
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
             UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
             self.pangesture.delegate = self;
@@ -91,6 +90,7 @@
             [imageView addGestureRecognizer:tap];
             [imageView addGestureRecognizer:doubleTap];
             [imageView addGestureRecognizer:self.pangesture];
+            ((CustomPanGestureRecognizer*)imageView.gestureRecognizers[2]).originalCenter = imageView.center;
             
             imageView.animalName = animalNames[(i+1)*j];
             imageView.description = animalDescriptions[(i+1)*j];
@@ -127,12 +127,14 @@
     {
         NSLog(@"phone shake happened");
         for (AnimalImageView *imageView in self.view.subviews){
+            NSLog(@"%@", [imageView.gestureRecognizers[2] description]);
+            CustomPanGestureRecognizer *recognizer = ((CustomPanGestureRecognizer*)imageView.gestureRecognizers[2]);
+            
             [UIView animateWithDuration:0.25 animations:^{
-                imageView.center = self.originalCenter;
-            }];
+                recognizer.view.center = recognizer.originalCenter;
+                            }];
+        }
     }
-    }
-
 }
 
 

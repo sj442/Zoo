@@ -11,11 +11,11 @@
 #import "DataStore.h"
 #import "ModalViewController.h"
 #import "AnimalImageView.h"
+#import "CustomPanGestureRecognizer.h"
 
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
 
-@property (strong,nonatomic) UIPanGestureRecognizer *pangesture;
-@property CGPoint originalCenter;
+@property (strong,nonatomic) CustomPanGestureRecognizer *pangesture;
 
 
     
