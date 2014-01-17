@@ -10,14 +10,13 @@
 
 @implementation Animal
 
--(Animal*)initWithName:(NSString*)name description:(NSString*)description funfacts:(NSString*)funfacts image:(UIImage*)image andimageview:(UIImageView*)imageview{
+-(Animal*)initWithName:(NSString*)name description:(NSString*)description funfacts:(NSString*)funfacts image:(UIImage*)image{
     self = [super init];
     if (self){
         self.name = name;
         self.description = description;
         self.funFacts = funfacts;
         self.animalImage = image;
-        self.animalImageview = imageview;
     }
     return self;
 }

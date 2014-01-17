@@ -11,11 +11,14 @@
 @interface DataStore : NSObject
 
 @property (strong, nonatomic) NSArray *animalNames;
-@property (strong, nonatomic) NSArray *imageNames;
-@property (strong, nonatomic) NSArray *descriptions;
-@property (strong, nonatomic) NSArray *funfacts;
-@property (strong, nonatomic) NSArray *imageViews;
 
+@property (strong, nonatomic) NSArray *imageNames;
+
+@property (strong, nonatomic) NSArray *descriptions;
+
+@property (strong, nonatomic) NSArray *funfacts;
+
+@property (strong, nonatomic) NSArray *imageViews;
 
 +(DataStore*)sharedDataStore;
 

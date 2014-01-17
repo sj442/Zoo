@@ -35,18 +35,27 @@
     
     [button addTarget:self action:@selector(cancelButtonTapped:)   forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(50, 50, 100, 50)];
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(130, 20, 150, 60)];
     name.text = self.animalName;
-    [self.view addSubview:name];
-    [self.view addSubview:button];
-
+    name.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
     
+    UILabel *descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 250)];
+    descriptionLabel.text = self.description;
+    descriptionLabel.numberOfLines = 0;
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(90, 250, 100, 100)];
+    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", self.image]];
+    
+    [self.view addSubview:name];
+    [self.view addSubview:descriptionLabel];
+    [self.view addSubview:button];
+    [self.view addSubview:imageView];
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
 }
 
 -(void)cancelButtonTapped:(id)sender{

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AnimalImageView.h"
 
 @interface Animal : NSObject
 
@@ -14,8 +15,8 @@
 @property (strong, nonatomic) NSString *description;
 @property (strong, nonatomic) NSString *funFacts;
 @property (strong, nonatomic) UIImage *animalImage;
-@property (strong, nonatomic) UIImageView *animalImageview;
+@property (strong, nonatomic) AnimalImageView *animalImageview;
 
--(Animal*)initWithName:(NSString*)name description:(NSString*)description funfacts:(NSString*)funfacts image:(UIImage*)image andimageview:(UIImageView*)imageview;
+-(Animal*)initWithName:(NSString*)name description:(NSString*)description funfacts:(NSString*)funfacts image:(UIImage*)image;
 
 @end

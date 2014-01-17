@@ -13,6 +13,6 @@
 @property (strong, nonatomic) NSString *animalName;
 @property (strong, nonatomic) NSString *description;
 @property (strong, nonatomic) NSString *funfacts;
-@property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *image;
 
 @end
