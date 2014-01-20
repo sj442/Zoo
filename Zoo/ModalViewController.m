@@ -35,15 +35,17 @@
     
     [button addTarget:self action:@selector(cancelButtonTapped:)   forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(130, 20, 150, 60)];
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(100, 20, 200, 60)];
     name.text = self.animalName;
-    name.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+    name.font = [UIFont fontWithName:@"Chalkduster" size:30];
+    name.textColor = [UIColor blueColor];
     
-    UILabel *descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 250)];
+    UILabel *descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, 280, 290)];
     descriptionLabel.text = self.description;
+    descriptionLabel.font = [UIFont fontWithName:@"Chalkduster" size:20];
     descriptionLabel.numberOfLines = 0;
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(90, 250, 100, 100)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(90, 350, 100, 100)];
     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", self.image]];
     
     [self.view addSubview:name];
