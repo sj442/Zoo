@@ -28,12 +28,18 @@
 {
     self.title = @"ZOO";
     [super viewDidLoad];
+    
+    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    //self.containerView.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.view addSubview:self.containerView];
+    
     [[DataStore sharedDataStore]animalData];
     [self createAnimalObjects];
 }
 
 -(void)handlePan:(CustomPanGestureRecognizer*)recognizer{
-    CGPoint translation = [recognizer translationInView:self.view];
+    CGPoint translation = [recognizer translationInView:self.containerView];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
                                          recognizer.view.center.y + translation.y);
     [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
@@ -76,7 +82,7 @@
     if (motion == UIEventSubtypeMotionShake)
     {
         NSLog(@"phone shake happened");
-        for (AnimalImageView *imageView in self.view.subviews){
+        for (AnimalImageView *imageView in self.containerView.subviews){
             CustomPanGestureRecognizer *recognizer = ((CustomPanGestureRecognizer*)imageView.gestureRecognizers[2]);
             [UIView animateWithDuration:0.25 animations:^{
                 recognizer.view.center = recognizer.originalCenter;
@@ -96,19 +102,19 @@
     
     NSArray *animalImagesnames = [[NSArray alloc]initWithArray:instance.imageNames];
     
-    NSMutableArray *imageViewArray = [[NSMutableArray alloc]init];
+    self.imageViewArray = [[NSMutableArray alloc]init];
     
     for (int i=0; i<3; i++){
         for (int j=0; j<4; j++){
             AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+100, 80, 80)];
-            [imageViewArray addObject:imageView];
+            [self.imageViewArray addObject:imageView];
         }
     }
     
     for (int k=0; k<12; k++){
         Animal *animal = [[Animal alloc]initWithName:animalNames[k] description:animalDescriptions[k] funfacts:animalFunfacts[k] image:animalImagesnames[k]];
-        ((AnimalImageView*)imageViewArray[k]).image = [UIImage imageNamed:animalImagesnames[k]];
-        animal.animalImageview = imageViewArray[k];
+        ((AnimalImageView*)self.imageViewArray[k]).image = [UIImage imageNamed:animalImagesnames[k]];
+        animal.animalImageview = self.imageViewArray[k];
         [animal.animalImageview setUserInteractionEnabled:YES];
         
         self.pangesture = [[CustomPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
@@ -128,16 +134,20 @@
         animal.animalImageview.funfacts = animalFunfacts[k];
         animal.animalImageview.imageName = animalImagesnames[k];
 
-        [self.view addSubview:animal.animalImageview];
+        [self.containerView addSubview:animal.animalImageview];
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
  }
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"view will appear called");
+    [super viewWillAppear:animated];
+   // [self LayoutConstraints];
+}
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -147,7 +157,24 @@
     [super viewWillDisappear:animated];
 }
 
+-(void)LayoutConstraints {
+    
+    [self.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view removeConstraints:self.view.constraints];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0.0f]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0f constant:0.0f]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:0.0f]];
 
-
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+    
+    
+    //[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeBottom  relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0.0f]];
+    
+    //[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.containerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1.0f constant:0.0f]];
+}
 
 @end

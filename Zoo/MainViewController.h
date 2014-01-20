@@ -18,8 +18,8 @@
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (strong,nonatomic) CustomPanGestureRecognizer *pangesture;
-@property (strong, nonatomic) CALayer *layer;
-
+@property (strong, nonatomic) NSMutableArray *imageViewArray;
+@property (strong, nonatomic) UIView *containerView;
 
     
 @end

@@ -50,7 +50,6 @@
     [self.view addSubview:descriptionLabel];
     [self.view addSubview:button];
     [self.view addSubview:imageView];
-
 }
 
 - (void)didReceiveMemoryWarning
