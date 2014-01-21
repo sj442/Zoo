@@ -40,6 +40,8 @@
 		1647D8C918885B0A0083B45C /* cross.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1647D8C818885B0A0083B45C /* cross.jpeg */; };
 		1647D8CC1888F9250083B45C /* CustomPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8CB1888F9250083B45C /* CustomPanGestureRecognizer.m */; };
 		1647D8D11889105F0083B45C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1647D8D01889105F0083B45C /* QuartzCore.framework */; };
+		1647D8D6188DAF330083B45C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1647D8D5188DAF330083B45C /* CoreText.framework */; };
+		1647D8D9188DAFD80083B45C /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647D8D8188DAFD80083B45C /* TextViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,9 @@
 		1647D8CA1888F9250083B45C /* CustomPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPanGestureRecognizer.h; sourceTree = "<group>"; };
 		1647D8CB1888F9250083B45C /* CustomPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPanGestureRecognizer.m; sourceTree = "<group>"; };
 		1647D8D01889105F0083B45C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1647D8D5188DAF330083B45C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		1647D8D7188DAFD80083B45C /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
+		1647D8D8188DAFD80083B45C /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1647D8D6188DAF330083B45C /* CoreText.framework in Frameworks */,
 				1647D8D11889105F0083B45C /* QuartzCore.framework in Frameworks */,
 				1647D872188800340083B45C /* CoreGraphics.framework in Frameworks */,
 				1647D874188800340083B45C /* UIKit.framework in Frameworks */,
@@ -146,6 +152,7 @@
 		1647D86E188800340083B45C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1647D8D5188DAF330083B45C /* CoreText.framework */,
 				1647D8D01889105F0083B45C /* QuartzCore.framework */,
 				1647D86F188800340083B45C /* Foundation.framework */,
 				1647D871188800340083B45C /* CoreGraphics.framework */,
@@ -168,6 +175,8 @@
 				1647D8CB1888F9250083B45C /* CustomPanGestureRecognizer.m */,
 				1647D8BF1888075B0083B45C /* MainViewController.h */,
 				1647D8C01888075B0083B45C /* MainViewController.m */,
+				1647D8D7188DAFD80083B45C /* TextViewController.h */,
+				1647D8D8188DAFD80083B45C /* TextViewController.m */,
 				1647D8C21888526B0083B45C /* ModalViewController.h */,
 				1647D8C31888526B0083B45C /* ModalViewController.m */,
 				1647D8C5188855BE0083B45C /* AnimalImageView.h */,
@@ -337,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1647D8D9188DAFD80083B45C /* TextViewController.m in Sources */,
 				1647D8CC1888F9250083B45C /* CustomPanGestureRecognizer.m in Sources */,
 				1647D8A0188800550083B45C /* Animal.m in Sources */,
 				1647D8BE188803B10083B45C /* DataStore.m in Sources */,

@@ -19,8 +19,8 @@
     
     MainViewController *main = [[MainViewController alloc]init];
     
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:main];
-    self.window.rootViewController = navController;
+   // UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:main];
+    self.window.rootViewController = main;
     return YES;
 }
 

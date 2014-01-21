@@ -13,6 +13,7 @@
 #import "ModalViewController.h"
 #import "AnimalImageView.h"
 #import "CustomPanGestureRecognizer.h"
+#import <CoreText/CoreText.h>
 
 
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate>
