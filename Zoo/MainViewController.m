@@ -153,6 +153,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.containerView removeFromSuperview];
+
 }
 
 #pragma mark-methods for orientation change
@@ -209,5 +211,6 @@
     }
     return array;
 }
+
 
 @end

@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSString *funfacts;
 @property (strong, nonatomic) NSString *image;
 
+@property (strong, nonatomic) UIView *containerView;
+
 @end
