@@ -26,16 +26,23 @@
 
 - (void)viewDidLoad
 {
-    //self.title = @"ZOO";
     [super viewDidLoad];
     
-    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.containerView.backgroundColor = [UIColor lightGrayColor];
-    
-    [self.view addSubview:self.containerView];
+//    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    self.containerView.backgroundColor = [UIColor lightGrayColor];
+//    
+//    [self.view addSubview:self.containerView];
     
     [[DataStore sharedDataStore]animalData];
-    [self createAnimalObjects];
+    
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])){
+            array = [self animalViewsLayoutForLandscape];
+            } else {
+            array = [self animalViewsLayoutForPortrait];
+            }
+    [self createAnimalObjectsInImageViewArray:array];
 }
 
 -(void)handlePan:(CustomPanGestureRecognizer*)recognizer{
@@ -91,9 +98,10 @@
     }
 }
 
--(void)createAnimalObjects{
+-(void)createAnimalObjectsInImageViewArray:(NSArray*)array{
     
     DataStore *instance = [DataStore sharedDataStore];
+    
     NSArray *animalNames = [[NSArray alloc]initWithArray:instance.animalNames];
     
     NSArray *animalDescriptions= [[NSArray alloc]initWithArray:instance.descriptions];
@@ -102,19 +110,10 @@
     
     NSArray *animalImagesnames = [[NSArray alloc]initWithArray:instance.imageNames];
     
-    self.imageViewArray = [[NSMutableArray alloc]init];
-    
-    for (int i=0; i<3; i++){
-        for (int j=0; j<4; j++){
-            AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+100, 80, 80)];
-            [self.imageViewArray addObject:imageView];
-        }
-    }
-    
     for (int k=0; k<12; k++){
         Animal *animal = [[Animal alloc]initWithName:animalNames[k] description:animalDescriptions[k] funfacts:animalFunfacts[k] image:animalImagesnames[k]];
-        ((AnimalImageView*)self.imageViewArray[k]).image = [UIImage imageNamed:animalImagesnames[k]];
-        animal.animalImageview = self.imageViewArray[k];
+        ((AnimalImageView*)array[k]).image = [UIImage imageNamed:animalImagesnames[k]];
+        animal.animalImageview = array[k];
         [animal.animalImageview setUserInteractionEnabled:YES];
         
         self.pangesture = [[CustomPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
@@ -146,7 +145,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"view will appear called");
     [super viewWillAppear:animated];
-    //[self LayoutConstraints];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -157,132 +155,59 @@
     [super viewWillDisappear:animated];
 }
 
+#pragma mark-methods for orientation change
+
 -(void)viewWillLayoutSubviews{
     
     NSLog(@"view will layout subviews called");
     
     if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])){
         
-        [self.containerView removeFromSuperview];
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:[self animalViewsLayoutForLandscape]];
         
-        self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
-        
-        self.containerView.backgroundColor = [UIColor lightGrayColor];
-        
-        [self.view addSubview:self.containerView];
-        
-        DataStore *instance = [DataStore sharedDataStore];
-        NSArray *animalNames = [[NSArray alloc]initWithArray:instance.animalNames];
-        
-        NSArray *animalDescriptions= [[NSArray alloc]initWithArray:instance.descriptions];
-        
-        NSArray *animalFunfacts = [[NSArray alloc]initWithArray:instance.funfacts];
-        
-        NSArray *animalImagesnames = [[NSArray alloc]initWithArray:instance.imageNames];
-        
-        self.imageViewArray = [[NSMutableArray alloc]init];
-        
-        for (int i=0; i<4; i++){
-            for (int j=0; j<3; j++){
-                AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+80, 100*j+20, 80, 80)];
-                [self.imageViewArray addObject:imageView];
-            }
-        }
-        
-        for (int k=0; k<12; k++){
-            Animal *animal = [[Animal alloc]initWithName:animalNames[k] description:animalDescriptions[k] funfacts:animalFunfacts[k] image:animalImagesnames[k]];
-            ((AnimalImageView*)self.imageViewArray[k]).image = [UIImage imageNamed:animalImagesnames[k]];
-            animal.animalImageview = self.imageViewArray[k];
-            [animal.animalImageview setUserInteractionEnabled:YES];
-            
-            self.pangesture = [[CustomPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
-            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-            self.pangesture.delegate = self;
-            tap.delegate = self;
-            longPress.delegate = self;
-            [animal.animalImageview addGestureRecognizer:tap];
-            [animal.animalImageview addGestureRecognizer:longPress];
-            [animal.animalImageview addGestureRecognizer:self.pangesture];
-            ((CustomPanGestureRecognizer*)animal.animalImageview.gestureRecognizers[2]).originalCenter = animal.animalImageview.center;
-            
-            animal.animalImageview.animalName = animalNames[k];
-            animal.animalImageview.description = animalDescriptions[k];
-            animal.animalImageview.funfacts = animalFunfacts[k];
-            animal.animalImageview.imageName = animalImagesnames[k];
-            
-            [self.containerView addSubview:animal.animalImageview];
-        }
-    } else
-    {
-        [self.containerView removeFromSuperview];
-
-        self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        self.containerView.backgroundColor = [UIColor lightGrayColor];
-        
-        [self.view addSubview:self.containerView];
-
-        DataStore *instance = [DataStore sharedDataStore];
-        NSArray *animalNames = [[NSArray alloc]initWithArray:instance.animalNames];
-        
-        NSArray *animalDescriptions= [[NSArray alloc]initWithArray:instance.descriptions];
-        
-        NSArray *animalFunfacts = [[NSArray alloc]initWithArray:instance.funfacts];
-        
-        NSArray *animalImagesnames = [[NSArray alloc]initWithArray:instance.imageNames];
-        
-        self.imageViewArray = [[NSMutableArray alloc]init];
-        
-        for (int i=0; i<3; i++){
-            for (int j=0; j<4; j++){
-                AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+100, 80, 80)];
-                [self.imageViewArray addObject:imageView];
-            }
-        }
-        
-        for (int k=0; k<12; k++){
-            Animal *animal = [[Animal alloc]initWithName:animalNames[k] description:animalDescriptions[k] funfacts:animalFunfacts[k] image:animalImagesnames[k]];
-            ((AnimalImageView*)self.imageViewArray[k]).image = [UIImage imageNamed:animalImagesnames[k]];
-            animal.animalImageview = self.imageViewArray[k];
-            [animal.animalImageview setUserInteractionEnabled:YES];
-            
-            self.pangesture = [[CustomPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
-            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
-            self.pangesture.delegate = self;
-            tap.delegate = self;
-            longPress.delegate = self;
-            [animal.animalImageview addGestureRecognizer:tap];
-            [animal.animalImageview addGestureRecognizer:longPress];
-            [animal.animalImageview addGestureRecognizer:self.pangesture];
-            ((CustomPanGestureRecognizer*)animal.animalImageview.gestureRecognizers[2]).originalCenter = animal.animalImageview.center;
-            
-            animal.animalImageview.animalName = animalNames[k];
-            animal.animalImageview.description = animalDescriptions[k];
-            animal.animalImageview.funfacts = animalFunfacts[k];
-            animal.animalImageview.imageName = animalImagesnames[k];
-            
-            [self.containerView addSubview:animal.animalImageview];
-        }
+        [self createAnimalObjectsInImageViewArray:array];
     }
+     else
+    {
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:[self animalViewsLayoutForPortrait]];
+        
+        [self createAnimalObjectsInImageViewArray:array];
+        }
 }
 
-//-(NSArray*)animalViewsLAyoutforLandscape{
-//    
-//    [self.containerView removeFromSuperview];
-//    
-//    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
-//    
-//    self.containerView.backgroundColor = [UIColor lightGrayColor];
-//    
-//    [self.view addSubview:self.containerView];
-//    
-//    NSMutableArray *array = [[NSMutableArray alloc]init];
-//
-//    
-//}
+-(NSMutableArray*)animalViewsLayoutForLandscape{
+    
+    [self.containerView removeFromSuperview];
+    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
+    //self.containerView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:self.containerView];
+    
+    NSMutableArray *array = [[NSMutableArray alloc]init];
 
+    for (int i=0; i<4; i++){
+        for (int j=0; j<3; j++){
+            AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+80, 100*j+20, 80, 80)];
+            [array addObject:imageView];
+        }
+    }
+    return  array;
+}
+
+-(NSMutableArray*)animalViewsLayoutForPortrait{
+
+    [self.containerView removeFromSuperview];
+    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    //self.containerView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:self.containerView];
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+
+    for (int i=0; i<3; i++){
+        for (int j=0; j<4; j++){
+            AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+100, 80, 80)];
+            [array addObject:imageView];
+        }
+    }
+    return array;
+}
 
 @end
