@@ -28,21 +28,7 @@
 {
     [super viewDidLoad];
     
-//    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-//
-//   self.containerView.backgroundColor = [UIColor yellowColor];
-//   [self.view addSubview:self.containerView];
-    
     [[DataStore sharedDataStore]animalData];
-    
-//    NSMutableArray *array = [[NSMutableArray alloc]init];
-//    
-//    if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])){
-//            array = [self animalViewsLayoutForLandscape];
-//            } else {
-//            array = [self animalViewsLayoutForPortrait];
-//            }
-//    [self createAnimalObjectsInImageViewArray:array];
 }
 
 -(void)handlePan:(CustomPanGestureRecognizer*)recognizer{
@@ -55,7 +41,7 @@
 -(void)handleTap:(UITapGestureRecognizer*)recognizer{
     recognizer.numberOfTapsRequired = 1;
     NSLog(@"handle tap called");
-    //if (recognizer.state == UIGestureRecognizerStateEnded){
+    if (recognizer.state == UIGestureRecognizerStateEnded){
     ModalViewController *modal = [[ModalViewController alloc]init];
     modal.animalName = ((AnimalImageView*)recognizer.view).animalName;
     NSLog(@"modal animal name trasferred %@", modal.animalName);
@@ -63,7 +49,7 @@
     modal.funfacts = ((AnimalImageView*)recognizer.view).funfacts;
     modal.image = ((AnimalImageView*)recognizer.view).imageName;
     [self presentViewController:modal animated:YES completion:nil];
-   // }
+    }
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer*)recognizer{
