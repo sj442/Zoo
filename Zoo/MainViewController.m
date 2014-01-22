@@ -29,20 +29,20 @@
     [super viewDidLoad];
     
 //    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-//    self.containerView.backgroundColor = [UIColor lightGrayColor];
-//    
-//    [self.view addSubview:self.containerView];
+//
+//   self.containerView.backgroundColor = [UIColor yellowColor];
+//   [self.view addSubview:self.containerView];
     
     [[DataStore sharedDataStore]animalData];
     
-    NSMutableArray *array = [[NSMutableArray alloc]init];
-    
-    if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])){
-            array = [self animalViewsLayoutForLandscape];
-            } else {
-            array = [self animalViewsLayoutForPortrait];
-            }
-    [self createAnimalObjectsInImageViewArray:array];
+//    NSMutableArray *array = [[NSMutableArray alloc]init];
+//    
+//    if (UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])){
+//            array = [self animalViewsLayoutForLandscape];
+//            } else {
+//            array = [self animalViewsLayoutForPortrait];
+//            }
+//    [self createAnimalObjectsInImageViewArray:array];
 }
 
 -(void)handlePan:(CustomPanGestureRecognizer*)recognizer{
@@ -149,6 +149,10 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [self.containerView removeFromSuperview];
+    
+    [self animalViewsLayoutForPortrait];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -196,13 +200,13 @@
 }
 
 -(NSMutableArray*)animalViewsLayoutForPortrait{
-
+    
     [self.containerView removeFromSuperview];
     self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     //self.containerView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.containerView];
     NSMutableArray *array = [[NSMutableArray alloc]init];
-
+    
     for (int i=0; i<3; i++){
         for (int j=0; j<4; j++){
             AnimalImageView *imageView = [[AnimalImageView alloc]initWithFrame:CGRectMake(100*i+20, 100*j+100, 80, 80)];

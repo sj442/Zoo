@@ -32,6 +32,10 @@
     [super viewDidAppear:animated];
     
     NSLog(@"modal view did appear called");
+    
+    [self.containerView removeFromSuperview];
+    
+    [self PortraitOrientationLayout];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,7 +63,7 @@
     
     [self.containerView removeFromSuperview];
     
-    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
     //self.containerView.backgroundColor = [UIColor lightGrayColor];
     
     [self.view addSubview:self.containerView];
@@ -98,6 +102,8 @@
     [self.containerView removeFromSuperview];
     
     self.containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    //self.containerView.backgroundColor = [UIColor lightGrayColor];
     
     [self.view addSubview:self.containerView];
     
