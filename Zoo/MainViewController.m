@@ -55,7 +55,7 @@
 -(void)handleTap:(UITapGestureRecognizer*)recognizer{
     recognizer.numberOfTapsRequired = 1;
     NSLog(@"handle tap called");
-    if (recognizer.state == UIGestureRecognizerStateEnded){
+    //if (recognizer.state == UIGestureRecognizerStateEnded){
     ModalViewController *modal = [[ModalViewController alloc]init];
     modal.animalName = ((AnimalImageView*)recognizer.view).animalName;
     NSLog(@"modal animal name trasferred %@", modal.animalName);
@@ -63,7 +63,7 @@
     modal.funfacts = ((AnimalImageView*)recognizer.view).funfacts;
     modal.image = ((AnimalImageView*)recognizer.view).imageName;
     [self presentViewController:modal animated:YES completion:nil];
-    }
+   // }
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer*)recognizer{
